@@ -1,4 +1,4 @@
-var raw_data = $.ajax({ url: 'data/cleaned_info.json', async: false, dataType: 'json', 
+var raw_data = $.ajax({ url: 'https://www.vibrantcitieslab.com/wordpress/wp-content/themes/fresh-vcl-theme/js/cleaned_info.json', async: false, dataType: 'json', 
 			success: function (response) { return response} });
 
 function getAllLocations () {
@@ -26,7 +26,7 @@ function basics() {
 function queryState() { 
             var userSelection = document.getElementById("stateOptions").value;
 	    var resp = getAllForState(userSelection); 
-	    document.getElementById("specificStateInfo").innerHTML = "<h3>State: " + userSelection + "</h3>";
+	    document.getElementById("specificStateInfo").innerHTML = "<h5>State: " + userSelection + "</h5>";
 	    document.getElementById("specificStateInfo").innerHTML += "<hr>";
 	    if (resp.length == 0) {
             	document.getElementById("specificStateInfo").innerHTML =  
@@ -43,11 +43,11 @@ function queryState() {
 			if (resp[i].EMAIL) { document.getElementById("specificStateInfo").innerHTML +="<p>Email: " + resp[i].EMAIL + "</p>" }
 			//if (resp[i].GRANTEE_DESCRIPTION) { document.getElementById("specificStateInfo").innerHTML +="<p>Grantee Description: " + resp[i].GRANTEE_DESCRIPTION + "</p>" }
 			//if (resp[i].SAMPLE_PROJECTS) { document.getElementById("specificStateInfo").innerHTML +="<p>Sample Projects: " + resp[i].SAMPLE_PROJECTS + "</p>" }
-			if (resp[i].URL) { document.getElementById("specificStateInfo").innerHTML +="<p><a href='"+ resp[i].URL +"'>url: " + resp[i].URL + "</a></p>" }
+			if (resp[i].URL) { document.getElementById("specificStateInfo").innerHTML +="<p><a href='"+              
+            ( (resp[i].URL.includes("http")) ? "" : "https://" )+resp[i].URL +"' target='_blank'>url: " + resp[i].URL + "</a></p>" }
 			document.getElementById("specificStateInfo").innerHTML += "<hr>";
+            console.log(resp[i].URL);
 
 		}
 	    }
         }
-
-
